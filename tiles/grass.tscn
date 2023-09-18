@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cu5cs8ahcxibw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_81ikm"]
+albedo_color = Color(0.223529, 0.439216, 0.172549, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_kx1lq"]
+material = SubResource("StandardMaterial3D_81ikm")
+size = Vector2(1, 1)
+
+[node name="grass" type="Node3D"]
+
+[node name="mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0.5)
+mesh = SubResource("PlaneMesh_kx1lq")
+skeleton = NodePath("../..")

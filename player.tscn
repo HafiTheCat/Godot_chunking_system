@@ -1,0 +1,39 @@
+[gd_scene load_steps=10 format=3 uid="uid://call1sd3gglk5"]
+
+[ext_resource type="Script" path="res://controller/cam_controller.gd" id="1_eewsq"]
+[ext_resource type="Script" path="res://scripts/map/render.gd" id="1_wyds4"]
+[ext_resource type="Shader" uid="uid://dvf6jcpxcftr1" path="res://shader.tres" id="2_te3by"]
+[ext_resource type="PackedScene" uid="uid://cu5cs8ahcxibw" path="res://tiles/grass.tscn" id="3_5eyam"]
+[ext_resource type="PackedScene" uid="uid://c8f8rx78rfywi" path="res://tiles/sand.tscn" id="4_jxx0k"]
+[ext_resource type="PackedScene" uid="uid://bj0wgxvmo35ea" path="res://tiles/stone.tscn" id="5_7622l"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pmjhq"]
+render_priority = 0
+shader = ExtResource("2_te3by")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_8cqmc"]
+lightmap_size_hint = Vector2i(17, 14)
+material = SubResource("ShaderMaterial_pmjhq")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yedk8"]
+
+[node name="player" type="CharacterBody3D"]
+script = ExtResource("1_eewsq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_8cqmc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_yedk8")
+
+[node name="renderer" type="Node" parent="."]
+script = ExtResource("1_wyds4")
+tiles = Array[PackedScene]([ExtResource("3_5eyam"), ExtResource("4_jxx0k"), ExtResource("5_7622l")])
+view_distance = 4
+
+[node name="Neck" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Camera3d" type="Camera3D" parent="Neck"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, 0)
+fov = 95.0
